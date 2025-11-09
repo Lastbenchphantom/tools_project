@@ -1,5 +1,3 @@
-
-
 const menuBtn = document.getElementById('menuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
 menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
@@ -127,20 +125,9 @@ function attachAddToCart() {
 }
 
 
-const searchInput = document.getElementById('searchInput');
-const sortSelect = document.getElementById('sortSelect');
-
-searchInput.addEventListener('input', () => {
-  const query = searchInput.value.toLowerCase();
-  renderProducts(products.filter(p => p.title.toLowerCase().includes(query)));
-});
-
-sortSelect.addEventListener('change', () => {
-  const value = sortSelect.value;
-  const sorted = [...products];
-  if(value === 'asc') sorted.sort((a,b)=>a.price-b.price);
-  if(value === 'desc') sorted.sort((a,b)=>b.price-a.price);
-  renderProducts(sorted);
+document.getElementById('addMoneyBtn').addEventListener('click', ()=>{
+  userBalance += 100;
+  updateCartUI();
 });
 
 
