@@ -1,4 +1,5 @@
 
+
 const menuBtn = document.getElementById('menuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
 menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
@@ -81,3 +82,72 @@ sortSelect.addEventListener('change', () => {
   if(value === 'desc') sorted.sort((a,b)=>b.price-a.price);
   renderProducts(sorted);
 });
+
+
+
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let userBalance = parseFloat(localStorage.getItem('balance')) || 100;
+const cartItems = document.getElementById('cartItems');
+const cartSubtotalEl = document.getElementById('cartSubtotal');
+const userBalanceEl = document.getElementById('userBalance');
+
+function updateCartUI() {
+  cartItems.innerHTML = '';
+  let subtotal = 0;
+  cart.forEach(item => {
+    subtotal += item.price * item.qty;
+    const div = document.createElement('div');
+    div.className = 'flex justify-between items-center bg-white p-2 rounded shadow';
+    div.innerHTML = `<span>${item.title} x ${item.qty}</span><span>$${(item.price*item.qty).toFixed(2)}</span>`;
+    cartItems.appendChild(div);
+  });
+  cartSubtotalEl.textContent = subtotal.toFixed(2);
+  userBalanceEl.textContent = userBalance.toFixed(2);
+  localStorage.setItem('cart', JSON.stringify(cart));
+  localStorage.setItem('balance', userBalance);
+}
+
+function attachAddToCart() {
+  const addBtns = document.querySelectorAll('.addCartBtn');
+  addBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = parseInt(btn.dataset.id);
+      const product = products.find(p => p.id === id);
+      const existing = cart.find(c => c.id === id);
+      const totalPrice = cart.reduce((a,b)=>a+b.price*b.qty,0) + product.price;
+      if(totalPrice > userBalance){
+        alert('Insufficient balance!');
+        return;
+      }
+      if(existing) existing.qty += 1;
+      else cart.push({...product, qty:1});
+      updateCartUI();
+    });
+  });
+}
+
+
+const searchInput = document.getElementById('searchInput');
+const sortSelect = document.getElementById('sortSelect');
+
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase();
+  renderProducts(products.filter(p => p.title.toLowerCase().includes(query)));
+});
+
+sortSelect.addEventListener('change', () => {
+  const value = sortSelect.value;
+  const sorted = [...products];
+  if(value === 'asc') sorted.sort((a,b)=>a.price-b.price);
+  if(value === 'desc') sorted.sort((a,b)=>b.price-a.price);
+  renderProducts(sorted);
+});
+
+
+
+
+fetchProducts();
+renderReviews();
+updateCartUI();
+
+

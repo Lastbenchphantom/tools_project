@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Computer Shop</title>
+  <title>Smart Shop</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
 </head>
+<body class="bg-gray-100 text-gray-800 overflow-x-hidden">
 
-<body class="bg-gray-100">
 
-
-  <header class="bg-white shadow">
-    <nav class="bg-white shadow sticky top-0 z-50">
+  <nav class="bg-white shadow sticky top-0 z-50">
     <div class="container mx-auto flex justify-between items-center py-4 px-6">
       <a href="#" class="font-bold text-xl">Smart Shop</a>
       <ul class="hidden md:flex space-x-6">
@@ -30,9 +29,9 @@
       <li><a href="#cart" class="nav-link">Cart</a></li>
     </ul>
   </nav>
-  </header>
 
-  <section id="home" class="relative w-full overflow-hidden h-64 md:h-96">
+
+ <section id="home" class="relative w-full overflow-hidden h-64 md:h-96">
   <div id="banner" class="h-full flex w-[500%] transition-transform duration-500">
     <img src="https://picsum.photos/1200/400?random=101" class="w-1/5 object-cover">
     <img src="https://picsum.photos/1200/400?random=102" class="w-1/5 object-cover">
@@ -43,6 +42,7 @@
   <button id="prevBanner" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white px-3 py-1 rounded shadow">‹</button>
   <button id="nextBanner" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white px-3 py-1 rounded shadow">›</button>
 </section>
+
 
 
   <section id="products" class="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
@@ -67,10 +67,26 @@
     </select>
   </div>
 
+
   <div 
     id="productGrid" 
     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
   ></div>
 </section>
+
+
+
+  <section id="cart" class="container mx-auto py-12 px-6">
+    <h2 class="text-3xl font-bold mb-6">Cart</h2>
+    <div class="mb-4 flex items-center gap-4">
+      <span>Balance: $<span id="userBalance">100</span></span>
+      <button id="addMoneyBtn" class="bg-green-500 text-white px-3 py-1 rounded">Add $50</button>
+      <input type="text" id="couponInput" placeholder="Coupon code" class="border px-3 py-1 rounded">
+      <button id="applyCouponBtn" class="bg-blue-500 text-white px-3 py-1 rounded">Apply Coupon</button>
+    </div>
+    <div id="cartItems" class="space-y-4"></div>
+    <div class="mt-4 font-bold text-lg">Subtotal: $<span id="cartSubtotal">0</span></div>
+  </section>
+    <script src="js/main.js"></script>
 </body>
 </html>
