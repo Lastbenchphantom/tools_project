@@ -87,6 +87,22 @@
     <div id="cartItems" class="space-y-4"></div>
     <div class="mt-4 font-bold text-lg">Subtotal: $<span id="cartSubtotal">0</span></div>
   </section>
+
+   <section id="reviews" class="container mx-auto py-12 px-6">
+    <h2 class="text-3xl font-bold mb-6">Reviews</h2>
+    <div id="reviewCarousel" class="relative overflow-hidden h-48 bg-white p-4 rounded shadow">
+      <div id="reviewWrapper" class="flex transition-transform duration-500"></div>
+      <button id="prevReview" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-200 px-2 py-1 rounded"></button>
+      <button id="nextReview" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-200 px-2 py-1 rounded"></button>
+    </div>
+  </section>
+
+    <footer class="bg-white mt-12 py-6 text-center shadow">
+    <p>© 2025 Smart Shop. All rights reserved.</p>
+    <button id="backToTop" class="mt-2 text-blue-500 underline">Back to Top</button>
+  </footer>
+
+  
     <script src="js/main.js"></script>
 </body>
 </html>
