@@ -196,39 +196,38 @@ document.getElementById('applyCouponBtn').addEventListener('click', () => {
 
 const reviewWrapper = document.getElementById('reviewWrapper');
 const reviews = [
-  { text: 'Amazing products!', author: 'Alice' },
-  { text: 'Fast delivery!', author: 'Bob' },
-  { text: 'Great customer service.', author: 'Charlie' },
-  { text: 'Highly recommend this store.', author: 'Dana' },
+  {text:"Amazing products!", author:"Alice"},
+  {text:"Fast delivery!", author:"Bob"},
+  {text:"Great customer service.", author:"Charlie"},
+  {text:"Highly recommend this store.", author:"Dana"}
 ];
 let reviewIndex = 0;
 
-function showReview(index) {
-  reviewWrapper.style.transform = `translateX(-${index * 100}%)`;
+function showReview(index){
+  reviewWrapper.style.transform = `translateX(-${index*100}%)`;
 }
 
-function renderReviews() {
+function renderReviews(){
   reviewWrapper.innerHTML = '';
-  reviewWrapper.style.width = `${reviews.length * 100}%`;
-  reviews.forEach(r => {
+  reviews.forEach(r=>{
     const div = document.createElement('div');
     div.className = 'min-w-full flex flex-col justify-center items-center';
-    div.innerHTML = `<p class="text-lg mb-2 text-center">${r.text}</p><span class="font-bold">${r.author}</span>`;
+    div.innerHTML = `<p class="text-lg mb-2">${r.text}</p><span class="font-bold">${r.author}</span>`;
     reviewWrapper.appendChild(div);
   });
 }
 
-document.getElementById('prevReview').addEventListener('click', () => {
-  reviewIndex = (reviewIndex - 1 + reviews.length) % reviews.length;
+document.getElementById('prevReview').addEventListener('click', ()=>{
+  reviewIndex = (reviewIndex-1+reviews.length)%reviews.length;
   showReview(reviewIndex);
 });
-document.getElementById('nextReview').addEventListener('click', () => {
-  reviewIndex = (reviewIndex + 1) % reviews.length;
+document.getElementById('nextReview').addEventListener('click', ()=>{
+  reviewIndex = (reviewIndex+1)%reviews.length;
   showReview(reviewIndex);
 });
 
-setInterval(() => {
-  reviewIndex = (reviewIndex + 1) % reviews.length;
+setInterval(()=>{
+  reviewIndex = (reviewIndex+1)%reviews.length;
   showReview(reviewIndex);
 }, 4000);
 
