@@ -12,7 +12,6 @@ navLinks.forEach(link => {
 });
 
 
-
 const banner = document.getElementById('banner');
 const banners = banner.children;
 let bannerIndex = 0;
@@ -37,7 +36,6 @@ setInterval(() => {
   bannerIndex = (bannerIndex + 1) % totalBanners;
   showBanner(bannerIndex);
 }, 5000);
-
 
 
 let products = [];
@@ -65,6 +63,9 @@ function renderProducts(list) {
   attachAddToCart();
 }
 
+
+
+
 const searchInput = document.getElementById('searchInput');
 const sortSelect = document.getElementById('sortSelect');
 
@@ -80,7 +81,6 @@ sortSelect.addEventListener('change', () => {
   if(value === 'desc') sorted.sort((a,b)=>b.price-a.price);
   renderProducts(sorted);
 });
-
 
 
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -131,6 +131,20 @@ document.getElementById('addMoneyBtn').addEventListener('click', ()=>{
 });
 
 
+document.getElementById('applyCouponBtn').addEventListener('click', ()=>{
+  const code = document.getElementById('couponInput').value;
+  if(code === 'SMART10'){
+    const subtotal = cart.reduce((a,b)=>a+b.price*b.qty,0);
+    const discount = subtotal*0.1;
+    userBalance += discount;
+    alert(`Coupon applied! $${discount.toFixed(2)} added to your balance.`);
+    updateCartUI();
+  } else {
+    alert('Invalid coupon');
+  }
+});
+
+
 const reviewWrapper = document.getElementById('reviewWrapper');
 const reviews = [
   {text:"Amazing products!", author:"Alice"},
@@ -174,9 +188,6 @@ document.getElementById('backToTop').addEventListener('click', ()=>{
 });
 
 
-
 fetchProducts();
 renderReviews();
 updateCartUI();
-
-
